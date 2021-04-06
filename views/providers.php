@@ -4,7 +4,7 @@
             <th>Código</th>
             <th>Nome</th>
             <th>Telefone</th>
-            <th>E-Mail</th>
+            <th>Email</th>
             <th>Rua</th>
             <th>Número</th>
             <th>Cidade</th>

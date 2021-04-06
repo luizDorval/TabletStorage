@@ -7,8 +7,8 @@
             <th>Cor</th>
             <th>Preço</th>
             <th>Fornecedor</th>
-            <th>Data de fabricação</th>
-            <th>Data de registro no sistema</th>
+            <th style="white-space: nowrap;">Data de fabricação</th>
+            <th style="white-space: nowrap;">Data de registro no sistema</th>
         </tr>
     </thead>
     <tbody>
