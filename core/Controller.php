@@ -2,13 +2,17 @@
 
 class Controller
 {
-    protected $data;
+    public $data;
 
+    public function __construct()
+    {
+        $this->data = [];
+    }
     // Chamado por todos os CONTROLLERS
-    protected function loadTemplate($viewName, $modelData = [])
+    public function loadTemplate($viewName, $modelData = [])
     {
         $this->data = $modelData;
-        require 'view/template.php';
+        require 'views/template.php';
     }
 
     // Chamado no template
@@ -16,6 +20,6 @@ class Controller
     {
         extract($modelData);
 
-        require 'view/' . $viewName . '.php';
+        require 'views/' . $viewName . '.php';
     }
 }

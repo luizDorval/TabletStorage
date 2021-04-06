@@ -17,8 +17,9 @@ class Core
      */
     public function run()
     {
-        if (isset($_GET["page"]))
+        if (isset($_GET["page"])) {
             $url = $_GET["page"];
+        }
 
         // Caso possua informações após a url entrara aqui
         if (!empty($url)) {
@@ -34,17 +35,17 @@ class Core
                 $method = 'index';
             }
 
-            if (count($url) > 0)
-                $parameters = $url;
+            (count($url) > 0) ? $parameters = $url : $parameters = [];
         } else {
             $controller = 'HomeController';
             $method = 'index';
+            $parameters = [];
         }
 
-        $controller_url = 'qi/TabletStore/Controllers/' . $controller . '.php';
+        $controller_url = 'qi/TabletStorage/Controllers/' . $controller . '.php';
 
         if (!file_exists($controller_url) && !method_exists($controller, $method)) {
-            $controller = 'HomeController';
+            $controller = 'ErrorController';
             $method = 'index';
         }
 

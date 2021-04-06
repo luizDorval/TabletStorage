@@ -1,5 +1,5 @@
-CREATE DATABASE TabletStore;
-USE TabletStore;
+CREATE DATABASE TabletStorage;
+USE TabletStorage;
 CREATE TABLE Addresses (
 	id_address INT ZEROFILL UNSIGNED AUTO_INCREMENT,
 	street VARCHAR(30) NOT NULL,

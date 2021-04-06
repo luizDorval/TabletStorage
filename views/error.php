@@ -1,0 +1,1 @@
+<h1 style="color: var(--textPrimary);">404 - Page Not Found</h1>
