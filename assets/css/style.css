@@ -58,65 +58,51 @@ main {
     height: 80%;
     width: 75%;
     padding: 2.5rem;
+    position: relative;
+}
+
+main .registerContainer {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main .loginContainer {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+main .buttonsSection {
+    width: 80%;
+    height: 80%;
+    margin: auto;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+
 }
 
-.login {
-    border: 3px solid var(--primary);
-    border-radius: 0.25rem;
-    width: 25rem;
-    height: 20rem;
-    padding: 2rem;
+
+main .addContainer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+main .add {
+    width: 2rem;
+    background-color: var(--primary);
+    text-decoration: none;
+    color: var(--textPrimary);
     display: flex;
     align-items: center;
-    flex-direction: column;
-}
-
-.login .inputs {
-    width: 20rem;
-    height: 8rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.login input {
-    width: 100%;
-    padding: 0.6rem;
-    border: 4px solid var(--primary);
-    color: var(--soft-black);
-    border-radius: 0.4rem;
-    font-family: 'Poppins';
-    transition: 300ms;
-
-}
-
-.login input::placeholder {
-    color: rgba(0, 0, 0, 0.8);
-}
-
-.login input.email {
-    top: 2rem;
-}
-
-.login input.password {
-    top: 7rem;
-}
-
-.login input:focus {
-    outline: none;
-    border: 6px solid var(--primary);
-}
-
-.login .confirmButtons {
-    width: 20rem;
-    height: 10rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    border-radius: 0.2rem;
 }
 
 /*Footer*/
@@ -129,6 +115,8 @@ footer {
     align-items: center;
     justify-content: center;
 }
+
+
 
 /*Links and Buttons*/
 main .buttons {
@@ -148,34 +136,6 @@ main .buttons {
 main .buttons:hover {
     background-color: var(--primary);
     border-color: var(--soft-black);
-}
-
-.login button,
-.login a {
-    width: 8rem;
-    height: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.4rem;
-    background-color: #8257e6;
-    color: var(--textPrimary);
-    border: none;
-    border-radius: 0.2rem;
-    padding: 0.5rem 2.8rem 0.5rem 2.8rem;
-    font-family: 'Poppins';
-    cursor: pointer;
-    transition: 300ms;
-}
-
-.login a.register {
-
-    text-decoration: none;
-}
-
-.login button:hover,
-.login a:hover {
-    background-color: var(--primaryHover);
 }
 
 .myLink {
@@ -265,27 +225,6 @@ table tbody td {
 
     main {
         flex-direction: column;
-    }
-
-    .login {
-        width: 20rem;
-        height: 20rem;
-    }
-
-    .login input {
-        width: 15rem;
-    }
-
-    .login .confirmButtons {
-        flex-direction: column-reverse;
-        justify-content: space-around;
-        bottom: 2rem;
-    }
-
-    .login button,
-    .login a {
-        margin-top: 1rem;
-        width: 15rem;
     }
 
     footer {
