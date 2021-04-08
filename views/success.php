@@ -1,0 +1,1 @@
+<h1 style="margin-top:2rem; color: var(--textPrimary);display:flex;justify-content: space-evenly;"><?= $this->data['success'] ?></h1>

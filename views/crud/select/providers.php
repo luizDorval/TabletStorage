@@ -1,4 +1,4 @@
-<div class="addContainer"><a class="add" href="">+</a></div>
+<div class="addContainer"><a class="add" href="<?= BASEURL ?>/Providers/add">+</a></div>
 <table>
     <thead>
         <tr>

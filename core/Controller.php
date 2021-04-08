@@ -4,14 +4,17 @@ class Controller
 {
     public $data;
 
+    public $url;
+
     public function __construct()
     {
         $this->data = [];
     }
     // Chamado por todos os CONTROLLERS
-    public function loadTemplate($viewName, $modelData = [])
+    public function loadTemplate($viewName, $modelData = [], $url = [])
     {
         $this->data = $modelData;
+        $this->url = $url;
         require 'views/template.php';
     }
 

@@ -1,5 +1,7 @@
 <?php
 
+use function PHPSTORM_META\type;
+
 class TabletsController extends Controller
 {
     public function index()
@@ -11,7 +13,7 @@ class TabletsController extends Controller
         $this->loadTemplate('crud/select/tablets', $data);
     }
 
-    public function add($id = '')
+    public function add($id = 0000000001)
     {
         # Verifica se o id é númerico
         if (!is_numeric($id)) {
@@ -21,8 +23,50 @@ class TabletsController extends Controller
             $tablets = new Tablets();
             # Faz uma consulta no banco
             $data = $tablets->getTabletsById($id);
-            # Chama a view
-            $this->loadTemplate('crud/app', $data);
+            $url['baseurl'] = BASEURL . '/Tablets';
+            if (empty($data)) {
+                $this->loadTemplate('error', $data);
+            } else {
+                # Chama a view
+                $this->loadTemplate('crud/add', $data, $url);
+            }
+        }
+    }
+
+    public function save()
+    {
+        if (isset(
+            $_POST['2'],
+            $_POST['7'],
+        )) {
+            $data = [];
+            $tablets = new Tablets();
+            foreach ($_POST as $key => $value) :
+                if ($value != '') {
+                    $data[$key] = $value;
+                } else {
+                    $data[$key] = null;
+                }
+            endforeach;
+
+            if ($tablets->add(
+                $data['1'],
+                $data['2'],
+                $data['3'],
+                $data['4'],
+                $data['7'],
+                $data['5'],
+                $data['6']
+            )) {
+                $data['success'] = 'Sucesso ao inserir dados<br><a href="' . BASEURL . '/Menu" class="myLink">Voltar</a>';
+                $this->loadTemplate('success', $data);
+            } else {
+                $data['erro'] = "Erro ao inserir dados";
+                $this->loadTemplate('error', $data);
+            }
+        } else {
+            $data['erro'] = "Erro ao inserir dados";
+            $this->loadTemplate('error', $data);
         }
     }
 
@@ -36,8 +80,12 @@ class TabletsController extends Controller
             $tablets = new Tablets();
             # Faz uma consulta no banco
             $data = $tablets->getTabletsById($id);
-            # Chama a view
-            $this->loadTemplate('crud/alter', $data);
+            if (empty($data)) {
+                $this->loadTemplate('error', $data);
+            } else {
+                # Chama a view
+                $this->loadTemplate('crud/alter', $data);
+            }
         }
     }
 
