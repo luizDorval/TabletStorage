@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="<?= BASEURL ?>/assets/css/login.css">
     <link rel="stylesheet" href="<?= BASEURL ?>/assets/css/register.css">
     <link rel="stylesheet" href="<?= BASEURL ?>/assets/css/values.css">
+    <link rel="stylesheet" href="<?= BASEURL ?>/assets/css/cards.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,400;0,700;1,100;1,200;1,400&display=swap" rel="stylesheet">
     <title>The Tablet Storage</title>
@@ -33,6 +34,8 @@
         <!-- RODAPÉ -->
         <footer>TheTabletStorage - by &nbsp;<a class="myLink" href="https://www.github.com/luizDorval/tablet-store-php"> Luiz Dorval</a></footer>
     </section>
+
+    <script src="<?= BASEURL ?>/assets/js/delete.js"></script>
 </body>
 
 </html>

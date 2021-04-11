@@ -13,24 +13,16 @@ class TabletsController extends Controller
         $this->loadTemplate('crud/select/tablets', $data);
     }
 
-    public function add($id = 0000000001)
+    public function add()
     {
-        # Verifica se o id é númerico
-        if (!is_numeric($id)) {
-            $this->loadTemplate('home');
-        } else {
-            # Chama um model
-            $tablets = new Tablets();
-            # Faz uma consulta no banco
-            $data = $tablets->getTabletsById($id);
-            $url['baseurl'] = BASEURL . '/Tablets';
-            if (empty($data)) {
-                $this->loadTemplate('error', $data);
-            } else {
-                # Chama a view
-                $this->loadTemplate('crud/add', $data, $url);
-            }
-        }
+        # Chama um model
+        $tablets = new Tablets();
+        # Faz uma consulta no banco
+        $data = $tablets->getTablets();
+        $url['baseurl'] = BASEURL . '/Tablets';
+
+        # Chama a view
+        $this->loadTemplate('crud/addTablets', $data, $url);
     }
 
     public function save()
@@ -49,23 +41,43 @@ class TabletsController extends Controller
                 }
             endforeach;
 
-            if ($tablets->add(
-                $data['1'],
-                $data['2'],
-                $data['3'],
-                $data['4'],
-                $data['7'],
-                $data['5'],
-                $data['6']
-            )) {
-                $data['success'] = 'Sucesso ao inserir dados<br><a href="' . BASEURL . '/Menu" class="myLink">Voltar</a>';
-                $this->loadTemplate('success', $data);
+            if (!$_POST['alter']) {
+                if ($tablets->add(
+                    $data['1'],
+                    $data['2'],
+                    $data['3'],
+                    $data['4'],
+                    $data['7'],
+                    $data['5'],
+                    $data['6']
+                )) {
+                    $data['success'] = 'Sucesso ao inserir dados<br><a href="' . BASEURL . '/Menu" class="myLink">Voltar</a>';
+                    $this->loadTemplate('success', $data);
+                } else {
+                    $data['error'] = "Erro ao inserir dados";
+                    $this->loadTemplate('error', $data);
+                }
             } else {
-                $data['erro'] = "Erro ao inserir dados";
-                $this->loadTemplate('error', $data);
+                if ($tablets->alter(
+                    $data['0'],
+                    $data['1'],
+                    $data['2'],
+                    $data['3'],
+                    $data['4'],
+                    $data['7'],
+                    $data['5'],
+                    $data['6'],
+                    $data['7']
+                )) {
+                    $data['success'] = 'Sucesso ao inserir dados<br><a href="' . BASEURL . '/Menu" class="myLink">Voltar</a>';
+                    $this->loadTemplate('success', $data);
+                } else {
+                    $data['error'] = "Erro ao inserir dados";
+                    $this->loadTemplate('error', $data);
+                }
             }
         } else {
-            $data['erro'] = "Erro ao inserir dados";
+            $data['error'] = "Dados Inválidos, caso não exista um fornecedor cadastro por favor cadastre";
             $this->loadTemplate('error', $data);
         }
     }
@@ -80,11 +92,12 @@ class TabletsController extends Controller
             $tablets = new Tablets();
             # Faz uma consulta no banco
             $data = $tablets->getTabletsById($id);
+            $url['baseurl'] = BASEURL . '/Tablets';
             if (empty($data)) {
-                $this->loadTemplate('error', $data);
+                $this->loadTemplate('error', $data, $url);
             } else {
                 # Chama a view
-                $this->loadTemplate('crud/alter', $data);
+                $this->loadTemplate('crud/alter', $data, $url);
             }
         }
     }
@@ -94,8 +107,18 @@ class TabletsController extends Controller
         if (!is_numeric($id)) {
             $this->loadTemplate('home');
         } else {
+            # Chama um model
+            $tablets = new Tablets();
+            $data = $tablets->delete($id);
+
+            if ($data) {
+                $confirm['success'] = "Registro $id excluido com sucesso";
+                $this->loadTemplate('success', $confirm);
+            } else {
+                $confirm['error'] = "Erro ao excluir o registro $id";
+                $this->loadTemplate('error', $confirm);
+            }
             # Chama a view
-            $this->loadTemplate('crud/delete');
         }
     }
 }

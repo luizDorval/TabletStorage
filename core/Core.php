@@ -42,7 +42,7 @@ class Core
             $parameters = [];
         }
 
-        $controller_url = 'qi/TabletStorage/Controllers/' . $controller . '.php';
+        $controller_url = BASEURL . '/Controllers' . $controller . '.php';
 
         if (!file_exists($controller_url) && !method_exists($controller, $method)) {
             $controller = 'ErrorController';

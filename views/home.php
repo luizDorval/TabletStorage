@@ -1,5 +1,6 @@
 <div class="loginContainer">
     <form class="login" method="GET" action="<?php echo BASEURL . "/Menu"; ?>">
+        <h1 style="color: var(--textPrimary); margin-bottom: 1rem;">Login</h1>
         <div class="inputs">
             <input type="email" class="email" placeholder="Email">
             <input type="password" class="password" placeholder="Senha">

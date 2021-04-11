@@ -11,24 +11,17 @@ class ProvidersController extends Controller
         $this->loadTemplate('crud/select/providers', $data);
     }
 
-    public function add($id = 0000000001)
+    public function add()
     {
         # Verifica se o id é númerico
-        if (!is_numeric($id)) {
-            $this->loadTemplate('home');
-        } else {
-            # Chama um model
-            $providers = new Providers();
-            # Faz uma consulta no banco
-            $data = $providers->getProvidersById($id);
-            $url['baseurl'] = BASEURL . '/Providers';
-            if (empty($data)) {
-                $this->loadTemplate('error', $data);
-            } else {
-                # Chama a view
-                $this->loadTemplate('crud/add', $data, $url);
-            }
-        }
+        # Chama um model
+        $providers = new Providers();
+        # Faz uma consulta no banco
+        $data = $providers->getProviders();
+        $url['baseurl'] = BASEURL . '/Providers';
+
+        # Chama a view
+        $this->loadTemplate('crud/addProviders', $data, $url);
     }
 
     public function save()
@@ -39,7 +32,6 @@ class ProvidersController extends Controller
         )) {
             $data = [];
             $providers = new Providers();
-            $addresses = new Addresses();
             foreach ($_POST as $key => $value) :
                 if ($value != '') {
                     $data[$key] = $value;
@@ -47,19 +39,17 @@ class ProvidersController extends Controller
                     $data[$key] = null;
                 }
             endforeach;
-
-            if ($addresses->add(
-                $data['5'],
-                $data['6'],
-                $data['7'],
-                $data['8'],
-                $data['9']
-            )) {
+            if (!$_POST['alter']) {
                 if ($providers->add(
                     $data['1'],
                     $data['2'],
                     $data['3'],
-                    $data['4']
+                    $data['4'],
+                    $data['5'],
+                    $data['6'],
+                    $data['7'],
+                    $data['8'],
+                    $data['9']
                 )) {
                     $data['success'] = 'Sucesso ao inserir dados<br><a href="' . BASEURL . '/Menu" class="myLink">Voltar</a>';
                     $this->loadTemplate('success', $data);
@@ -68,8 +58,24 @@ class ProvidersController extends Controller
                     $this->loadTemplate('error', $data);
                 }
             } else {
-                $data['erro'] = "Erro ao inserir dados";
-                $this->loadTemplate('error', $data);
+                if ($providers->alter(
+                    $data['0'],
+                    $data['1'],
+                    $data['2'],
+                    $data['3'],
+                    $data['4'],
+                    $data['5'],
+                    $data['6'],
+                    $data['7'],
+                    $data['8'],
+                    $data['9']
+                )) {
+                    $data['success'] = 'Sucesso ao inserir dados<br><a href="' . BASEURL . '/Menu" class="myLink">Voltar</a>';
+                    $this->loadTemplate('success', $data);
+                } else {
+                    $data['erro'] = "Erro ao inserir dados";
+                    $this->loadTemplate('error', $data);
+                }
             }
         } else {
             $data['erro'] = "Erro ao inserir dados";
@@ -86,11 +92,12 @@ class ProvidersController extends Controller
             $providers = new Providers();
             # Faz uma consulta no banco
             $data = $providers->getProvidersById($id);
+            $url['baseurl'] = BASEURL . '/Providers';
             if (empty($data)) {
-                $this->loadTemplate('error');
+                $this->loadTemplate('error', $data, $url);
             } else {
                 # Chama a view
-                $this->loadTemplate('crud/alter', $data);
+                $this->loadTemplate('crud/alter', $data, $url);
             }
         }
     }
@@ -100,8 +107,17 @@ class ProvidersController extends Controller
         if (!is_numeric($id)) {
             $this->loadTemplate('home');
         } else {
-            # Chama a view
-            $this->loadTemplate('crud/delete');
+            # Chama um model
+            $providers = new Providers();
+            $data = $providers->delete($id);
+
+            if ($data) {
+                $confirm['success'] = "Registro $id excluido com sucesso";
+                $this->loadTemplate('success', $confirm);
+            } else {
+                $confirm['error'] = "Erro ao excluir o registro $id";
+                $this->loadTemplate('error', $confirm);
+            }
         }
     }
 }

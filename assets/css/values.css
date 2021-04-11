@@ -2,42 +2,6 @@ main {
     overflow-x: auto;
 }
 
-.crudTitle {
-    width: 100%;
-    text-align: center;
-    color: var(--textPrimary);
-    margin-top: -0.5rem;
-    font-size: 2rem;
-}
-
-.values {
-    margin: auto;
-    width: 30rem;
-    height: 80%;
-    display: block;
-    color: var(--textPrimary);
-    border: 4px solid var(--primary);
-    padding: 1.2rem;
-}
-
-.values div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-
-}
-
-.values input {
-    width: 10rem;
-    height: 2.4rem;
-    padding: 0.4rem;
-    border: 4px solid var(--primary);
-    color: var(--soft-black);
-    border-radius: 0.4rem;
-    font-family: 'Poppins';
-}
-
 .confirmButtons {
     width: 50%;
     margin: auto;

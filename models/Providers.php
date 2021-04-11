@@ -14,21 +14,75 @@ class Providers
         $name = null,
         $phone = null,
         $email = null,
-        $id_address = null
-
+        $street = null,
+        $number = null,
+        $city = null,
+        $state = null,
+        $cep = null
     ) {
         $statement = $this->connection->prepare("INSERT INTO Providers (  name, 
                                                                 phone, 
                                                                 email, 
-                                                                id_address)
+                                                                street,
+                                                                number,
+                                                                city,
+                                                                state,
+                                                                cep)
                                                 VALUES(:name, 
                                                         :phone, 
                                                         :email, 
-                                                        :id_address);");
+                                                        :street,
+                                                        :number,
+                                                        :city,
+                                                        :state,
+                                                        :cep);");
         $statement->bindParam(':name', $name);
         $statement->bindParam(':phone', $phone);
         $statement->bindParam(':email', $email);
-        $statement->bindParam(':id_address', $id_address);
+        $statement->bindParam(':street', $street);
+        $statement->bindParam(':number', $number);
+        $statement->bindParam(':city', $city);
+        $statement->bindParam(':state', $state);
+        $statement->bindParam(':cep', $cep);
+        if ($statement->execute()) {
+            header('Location', BASEURL . '/Success');
+            return true;
+        } else {
+            header('Location', BASEURL . '/Error');
+            return false;
+        }
+    }
+
+    public function alter(
+        $id_provider = null,
+        $name = null,
+        $phone = null,
+        $email = null,
+        $street = null,
+        $number = null,
+        $city = null,
+        $state = null,
+        $cep = null
+    ) {
+        $statement = $this->connection->prepare("UPDATE Providers 
+                                                SET name = :name,
+                                                    phone = :phone,
+                                                    email = :email,
+                                                    street = :street,
+                                                    number = :number,
+                                                    city = :city,
+                                                    state = :state,
+                                                    cep = :cep
+                                                WHERE id_provider = :id_provider");
+        $statement->bindParam(':id_provider', $id_provider);
+        $statement->bindParam(':name', $name);
+        $statement->bindParam(':phone', $phone);
+        $statement->bindParam(':email', $email);
+        $statement->bindParam(':street', $street);
+        $statement->bindParam(':number', $number);
+        $statement->bindParam(':city', $city);
+        $statement->bindParam(':state', $state);
+        $statement->bindParam(':cep', $cep);
         if ($statement->execute()) {
             header('Location', BASEURL . '/Success');
             return true;
@@ -44,17 +98,14 @@ class Providers
                                                     name, 
                                                     phone,
                                                     email, 
-                                                    Providers.id_address, 
-                                                    Addresses.street, 
-                                                    Addresses.number, 
-                                                    Addresses.city, 
-                                                    Addresses.state, 
-                                                    Addresses.cep 
-                                            FROM Providers 
-                                            INNER JOIN Addresses 
-                                            ON Providers.id_address = Addresses.id_address");
+                                                    street, 
+                                                    number, 
+                                                    city, 
+                                                    state, 
+                                                    cep 
+                                                FROM Providers ");
         $statement->execute();
-        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $data = $statement->fetchAll();
         return $data;
     }
 
@@ -65,19 +116,30 @@ class Providers
                                                     name, 
                                                     phone,
                                                     email, 
-                                                    Providers.id_address,
-                                                    Addresses.street,
-                                                    Addresses.number,
-                                                    Addresses.city,
-                                                    Addresses.state,
-                                                    Addresses.cep
-                                            FROM Providers 
-                                            INNER JOIN Addresses 
-                                            ON Providers.id_address = Addresses.id_address
-                                            WHERE id_provider = :id");
+                                                    street,
+                                                    number,
+                                                    city,
+                                                    state,
+                                                    cep
+                                                FROM Providers 
+                                                WHERE id_provider = :id");
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
-        $data = $statement->fetchall(PDO::FETCH_NUM);
+        $data = $statement->fetchAll(PDO::FETCH_NUM);
         return $data;
+    }
+
+    public function delete($id = null)
+    {
+        $statement = $this->connection->prepare("DELETE FROM Providers 
+                                                WHERE id_provider = :id");
+        $statement->bindParam(':id', $id);
+        if ($statement->execute()) {
+            header('Location', BASEURL . '/Success');
+            return true;
+        } else {
+            header('Location', BASEURL . '/Error');
+            return false;
+        }
     }
 }

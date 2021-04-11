@@ -1,0 +1,149 @@
+.crudTitle {
+    width: 100%;
+    text-align: center;
+    color: var(--textPrimary);
+    margin-top: -0.5rem;
+    font-size: 2rem;
+}
+
+/* Cards*/
+.card {
+    display: flex;
+    width: 100%;
+    flex: 1 1 60%;
+    align-items: center;
+    background-color: #222222;
+    border: 0.5px solid var(--primary);
+    border-radius: 10px;
+    align-content: flex-start;
+    justify-content: flex-start;
+    transform: scale(0.9);
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    color: var(--textPrimary);
+    padding: 5px;
+    position: relative;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.8s;
+}
+
+.card:hover {
+    transform: scale(1.0);
+}
+
+.card>.item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    margin-right: 5px;
+}
+
+.card>.item sub {
+    color: var(--textPrimary);
+}
+
+.card:hover sub {
+    color: var(--primary);
+}
+
+.card .settings {
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    position: absolute;
+    top: 0%;
+    right: 1%;
+    transition: 300ms ease-in;
+    filter: grayscale(1);
+}
+
+.card:hover .settings {
+    filter: grayscale(0);
+}
+
+.card .settings span {
+    padding: 0.5rem 0;
+}
+
+@media (max-width: 800px) {
+    .card .settings {
+        height: 15%;
+        right: 4%;
+    }
+}
+
+/*Card Add*/
+
+.card.add {
+    display: flex;
+    width: 50%;
+    height: 90%;
+    flex-direction: column;
+    background-color: #222222;
+    border: 0.5px solid var(--primary);
+    border-radius: 10px;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    color: var(--textPrimary);
+    transform: scale(1);
+    padding-left: 2.9rem;
+}
+
+.card.add input {
+    display: flex;
+    width: 70%;
+    background-color: #DCDCDC;
+    height: 6%;
+    font-size: large;
+    border-radius: 10px;
+    margin-bottom: 3%;
+    padding: 0.7rem;
+}
+
+.addButtons {
+    width: 100%;
+    height: 20%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addButtons a,
+.addButtons button {
+    width: 40%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary);
+    color: var(--textPrimary);
+    border: none;
+    border-radius: 0.2rem;
+    font-family: 'Poppins';
+    text-decoration: none;
+    cursor: pointer;
+    transition: 300ms;
+    margin-right: 8%;
+}
+
+
+.addButtons a:hover,
+.addButtons button:hover {
+    background-color: var(--primaryHover);
+}
+
+/* Alter */
+.card.add.alter {
+    height: 90%;
+}
+
+.cardInputs {
+    width: 100%;
+    height: 80%;
+}

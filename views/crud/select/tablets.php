@@ -1,38 +1,66 @@
 <div class="addContainer"><a class="add" href="<?= BASEURL ?>/Tablets/add">+</a></div>
-<table>
-    <thead>
-        <tr>
-            <th>Código</th>
-            <th>Marca</th>
-            <th>Modelo</th>
-            <th>Cor</th>
-            <th>Preço</th>
-            <th style="white-space: nowrap;">Data de fabricação</th>
-            <th style="white-space: nowrap;">Data de registro no sistema</th>
-            <th style="white-space: nowrap;">Código do Fornecedor</th>
-            <th style="white-space: nowrap;">Nome do Fornecedor</th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
+<h1 class="crudTitle">Registros</h1>
+<?php foreach ($this->data as $data) :
+    echo '<section class="card">';
 
-        foreach ($this->data as $data) {
-            echo '<tr>';
-            foreach ($data as $key => $value) {
-                echo '<td style="white-space: none;">';
-                echo $value;
-                echo '</td>';
+
+    foreach ($data as $key => $value) :
+        if (is_numeric($key)) {
+            (empty($value)) ? $value = 'Não informado' : $value = $value;
+            switch ($key) {
+                case 0:
+                    $key = 'Código:';
+                    echo '<span class="item">' . $key . '<br><sub>' . $value . '</sub></span>';
+                    break;
+                case 1:
+                    # code...
+                    $key = 'Marca:';
+                    echo '<span class="item">' . $key . '<br><sub>' . $value . '</sub></span>';
+                    break;
+                case 2:
+                    # code...
+                    $key = 'Modelo:';
+                    echo '<span class="item">' . $key . '<br><sub>' . $value . '</sub></span>';
+                    break;
+                case 3:
+                    # code...
+                    $key = 'Cor:';
+                    echo '<span class="item">' . $key . '<br><sub>' . $value . '</sub></span>';
+                    break;
+                case 4:
+                    # code...
+                    $key = 'Valor:';
+                    echo '<span class="item">' . $key . '<br><sub>' . $value . '</sub></span>';
+                    break;
+                case 5:
+                    # code...
+                    $key = 'Data de fabricação:';
+                    echo '<span class="item">' . $key . '<br><sub>' . $value . '</sub></span>';
+                    break;
+                case 6:
+                    # code...
+                    $key = 'Data de registro no sistema:';
+                    echo '<span class="item">' . $key . '<br><sub>' . $value . '</sub></span>';
+                    break;
+                case 7:
+                    # code...
+                    $key = 'Código do fornecedor:';
+                    echo '<span class="item">' . $key . '<br><sub>' . $value . '</sub></span>';
+                    break;
+                case 8:
+                    $key = 'Data de registro no sistema:';
+                    echo '<span class="item">' . $key . '<br><sub>' . $value . '</sub></span>';
+                    break;
+                default:
+                    $key = 'Erro';
+                    echo '<span class="item">' . $key . '<br><sub>' . $value . '</sub></span>';
+                    break;
             }
-            echo '<td>';
-            echo '<a style="text-decoration: none; filter: grayscale(1);" href="' . BASEURL . '/Tablets/alter/' . $data['id_tablet'] . '">✏️</a>';
-            echo '</td>';
-            echo '<td>';
-            echo '<a style="text-decoration: none; filter: grayscale(0.25);" href="' . BASEURL . '/Tablets/delete/' . $data['id_tablet'] . '">❌</a>';
-            echo '</td>';
-            echo '</tr>';
         }
-        ?>
-    </tbody>
-</table>
+    endforeach;
+    echo '<div class="settings">
+            <span><a style="text-decoration: none;" href="' . BASEURL . '/Tablets/alter/' . $data['id_tablet'] . '">✏️</a></span>
+            <span><a style="text-decoration: none;" href="' . BASEURL . '/Tablets/delete/' . $data['id_tablet'] . '">❌</a></span
+        </div>';
+    echo '</section>';
+endforeach; ?>

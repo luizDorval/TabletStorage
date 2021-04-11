@@ -1,17 +1,25 @@
-.register {
+.loginContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 300ms;
+}
+
+.registerContainer .register {
     border: 3px solid var(--primary);
     border-radius: 0.25rem;
-    width: 22rem;
+    width: 25rem;
     height: 20rem;
     padding: 2rem;
     display: flex;
     align-items: center;
     flex-direction: column;
+    transition: 300ms;
 }
 
 .register .inputs {
-    width: 20rem;
-    height: 8rem;
+    width: 100%;
+    height: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -39,12 +47,11 @@
 }
 
 .register .confirmButtons {
-    width: 20rem;
-    height: 10rem;
+    width: 100%;
+    height: 10%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: -10rem;
 }
 
 .register button,
@@ -69,4 +76,30 @@
 .register button:hover,
 .register a:hover {
     background-color: var(--primaryHover);
+}
+
+@media (max-width: 800px) {
+    .register {
+        width: 100%;
+        height: 80%;
+    }
+
+    .register .inputs {
+        width: 120%;
+    }
+
+    .register input {
+        width: 100%;
+    }
+
+    .register .confirmButtons {
+        flex-direction: column-reverse;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .register button,
+    .register a {
+        margin-top: 1rem;
+    }
 }
