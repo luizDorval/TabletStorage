@@ -142,10 +142,31 @@ class Tablets
                                                     value, 
                                                     fabrication_date, 
                                                     register_on_system_date, 
-                                                    id_provider  
+                                                    id_provider 
                                             FROM Tablets
                                             WHERE Tablets.id_tablet = :id");
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+        $data = $statement->fetchAll(PDO::FETCH_NUM);
+        return $data;
+    }
+
+    public function getTabletsByProviderName($providerName = null)
+    {
+        $statement = $this->connection->prepare("SELECT id_tablet,
+                                                    brand, 
+                                                    model, 
+                                                    color, 
+                                                    value, 
+                                                    fabrication_date, 
+                                                    register_on_system_date, 
+                                                    Tablets.id_provider,
+                                                    Providers.name
+                                            FROM Tablets
+                                            INNER JOIN Providers
+                                            ON Tablets.id_provider = Providers.id_provider
+                                            WHERE Providers.name = :name");
+        $statement->bindParam(':name', $providerName);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_NUM);
         return $data;

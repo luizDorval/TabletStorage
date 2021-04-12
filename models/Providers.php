@@ -129,6 +129,26 @@ class Providers
         return $data;
     }
 
+    public function getProvidersByProviderName($providerName)
+    {
+        $data = [];
+        $statement = $this->connection->prepare("SELECT id_provider, 
+                                                    name, 
+                                                    phone,
+                                                    email, 
+                                                    street,
+                                                    number,
+                                                    city,
+                                                    state,
+                                                    cep
+                                                FROM Providers 
+                                                WHERE name = :name");
+        $statement->bindParam(':name', $providerName);
+        $statement->execute();
+        $data = $statement->fetchAll(PDO::FETCH_NUM);
+        return $data;
+    }
+
     public function delete($id = null)
     {
         $statement = $this->connection->prepare("DELETE FROM Providers 

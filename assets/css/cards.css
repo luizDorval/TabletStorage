@@ -6,6 +6,44 @@
     font-size: 2rem;
 }
 
+.searchButtons {
+    width: 100%;
+    justify-content: space-evenly;
+    display: flex;
+}
+
+.searchButtons input {
+    display: flex;
+    width: 30%;
+    background-color: #DCDCDC;
+    font-size: large;
+    border-radius: 10px;
+    padding: 0.4rem;
+    border: 0.5px solid var(--primary);
+}
+
+.searchButtons button {
+    height: 20%;
+    padding: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary);
+    color: var(--textPrimary);
+    border: none;
+    border-radius: 0.2rem;
+    font-family: 'Poppins';
+    text-decoration: none;
+    cursor: pointer;
+    transition: 300ms;
+    margin-right: 8%;
+}
+
+.searchButtons a:hover,
+.searchButtons button:hover {
+    background-color: var(--primaryHover);
+}
+
 /* Cards*/
 .card {
     display: flex;

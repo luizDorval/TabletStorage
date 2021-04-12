@@ -1,5 +1,10 @@
 <div class="addContainer"><a class="add" href="<?= BASEURL ?>/Providers/add">+</a></div>
 <h1 class="crudTitle">Registros</h1>
+<form action="<?= BASEURL ?>/Providers/index" class="searchButtons">
+    <input type="text" class="" placeholder="Código" name="id_provider">
+    <input type="text" placeholder="Nome De Fornecedor" name="providerName">
+    <button>Procurar</button>
+</form>
 <?php foreach ($this->data as $data) :
     echo '<section class="card">';
 

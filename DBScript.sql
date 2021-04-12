@@ -22,38 +22,4 @@ CREATE TABLE Tablets (
 	register_on_system_date DATE,
 	CONSTRAINT pk_id_tablet PRIMARY KEY (id_tablet),
 	CONSTRAINT fk_id_provider FOREIGN KEY (id_provider) REFERENCES Providers(id_provider));
-	/* Os inserts abaixo são padrões para gerar as telas de adicionar e alterar*/
-	INSERT INTO Providers ( id_provider
-							name, 
-							phone, 
-							email, 
-							street,
-							number,
-							city,
-							state,
-							cep)
-	VALUES(1
-			'name', 
-			'phone', 
-			'email', 
-			'street',
-			190,
-			'city',
-			'state',
-			'99999999');
-	INSERT INTO Tablets (id_tablet,
-					brand, 
-					model, 
-					color, 
-					value,
-					id_provider, 
-					fabrication_date, 
-					register_on_system_date)
-	VALUES(1
-		'brand', 
-		'model', 
-		'color', 
-		100,
-		1, 
-		'1995-10-11', 
-		'1995-11-11');
+	/* Os inserts abaixo s

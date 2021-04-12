@@ -8,7 +8,14 @@ class TabletsController extends Controller
     {
         # Chama um Model
         $tablets = new Tablets();
-        $data = $tablets->getTablets();
+
+        if ($_GET['id_tablet']) {
+            $data = $tablets->getTabletsById($_GET['id_tablet']);
+        } else if ($_GET['providerName']) {
+            $data = $tablets->getTabletsByProviderName($_GET['providerName']);
+        } else {
+            $data = $tablets->getTablets();
+        }
         # Chama a view
         $this->loadTemplate('crud/select/tablets', $data);
     }

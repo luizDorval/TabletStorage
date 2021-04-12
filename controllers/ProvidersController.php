@@ -6,7 +6,14 @@ class ProvidersController extends Controller
     {
         # Chama um Model
         $providers = new Providers();
-        $data = $providers->getProviders();
+        if ($_GET['id_provider']) {
+            $data = $providers->getProvidersById($_GET['id_provider']);
+        } else if ($_GET['providerName']) {
+            $data = $providers->getProvidersByProviderName($_GET['providerName']);
+        } else {
+            $data = $providers->getProviders();
+        }
+
         # Chama a view
         $this->loadTemplate('crud/select/providers', $data);
     }
