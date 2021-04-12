@@ -125,7 +125,7 @@ class Providers
                                                 WHERE id_provider = :id");
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
-        $data = $statement->fetchAll(PDO::FETCH_NUM);
+        $data = $statement->fetchAll();
         return $data;
     }
 
@@ -145,7 +145,7 @@ class Providers
                                                 WHERE name = :name");
         $statement->bindParam(':name', $providerName);
         $statement->execute();
-        $data = $statement->fetchAll(PDO::FETCH_NUM);
+        $data = $statement->fetchAll();
         return $data;
     }
 
