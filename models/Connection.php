@@ -1,5 +1,4 @@
 <?php
-
 class Connection
 {
     private static $instance;
@@ -20,7 +19,7 @@ class Connection
                 self::$instance = new PDO('mysql:host=' . $host . ';dbname=' . $dbname, $user, $password);
                 self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $exception) {
-                echo 'Erro: ' . $exception;
+                echo 'Erro: ' . $exception->getMessage();
             }
         }
 

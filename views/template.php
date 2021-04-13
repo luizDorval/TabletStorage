@@ -19,7 +19,8 @@
     <section id="container">
         <!-- CABEÇALHO -->
         <header>
-            <h1>The <span><a class="myLink" href="<?php echo BASEURL . "/Home"; ?>">Tablet</a></span> Storage</h1>
+            <h1>The <span><a class="myLink" href="<?php echo BASEURL . "/Menu"; ?>">Tablet</a></span> Storage</h1>
+            <div style="<?= ($this->data['quit']) ? 'display: none' : 'display: block' ?>;" class="quit"><a href="<?= BASEURL . '/Login/quit' ?>">Sair</a></div>
         </header>
 
         <!-- -------------------------------------- -->

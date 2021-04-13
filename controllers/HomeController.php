@@ -4,9 +4,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        # Chama um Model
-        # ------
+        $data['quit'] = true;
         # Chama a view
-        $this->loadTemplate('home');
+        $this->loadTemplate('home', $data);
     }
 }

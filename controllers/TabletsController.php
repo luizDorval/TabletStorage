@@ -17,115 +17,142 @@ class TabletsController extends Controller
             $data = $tablets->getTablets();
         }
         # Chama a view
-        $this->loadTemplate('crud/select/tablets', $data);
+        if (isset($_SESSION['id_user'])) {
+            $this->loadTemplate('crud/select/tablets', $data);
+        } else {
+        }
     }
 
     public function add()
     {
-        # Chama um model
-        $tablets = new Tablets();
-        # Faz uma consulta no banco
-        $data = $tablets->getTablets();
-        $url['baseurl'] = BASEURL . '/Tablets';
+        if (isset($_SESSION['id_user'])) {
+            # Chama um model
+            $tablets = new Tablets();
+            # Faz uma consulta no banco
+            $data = $tablets->getTablets();
+            $url['baseurl'] = BASEURL . '/Tablets';
 
-        # Chama a view
-        $this->loadTemplate('crud/addTablets', $data, $url);
+            # Chama a view
+
+            $this->loadTemplate('crud/addTablets', $data, $url);
+        } else {
+            $data['quit'] = true;
+            $this->loadTemplate('home', $data);
+        }
     }
 
     public function save()
     {
-        if (isset(
-            $_POST['2'],
-            $_POST['7'],
-        )) {
-            $data = [];
-            $tablets = new Tablets();
-            foreach ($_POST as $key => $value) :
-                if ($value != '') {
-                    $data[$key] = $value;
-                } else {
-                    $data[$key] = null;
-                }
-            endforeach;
+        if (isset($_SESSION['id_user'])) {
+            if (isset(
+                $_POST['2'],
+                $_POST['7'],
+            )) {
+                $data = [];
+                $tablets = new Tablets();
+                foreach ($_POST as $key => $value) :
+                    if ($value != '') {
+                        $data[$key] = $value;
+                    } else {
+                        $data[$key] = null;
+                    }
+                endforeach;
 
-            if (!$_POST['alter']) {
-                if ($tablets->add(
-                    $data['1'],
-                    $data['2'],
-                    $data['3'],
-                    $data['4'],
-                    $data['7'],
-                    $data['5'],
-                    $data['6']
-                )) {
-                    $data['success'] = 'Sucesso ao inserir dados<br><a href="' . BASEURL . '/Menu" class="myLink">Voltar</a>';
-                    $this->loadTemplate('success', $data);
+                if (!$_POST['alter']) {
+                    if ($tablets->add(
+                        $data['1'],
+                        $data['2'],
+                        $data['3'],
+                        $data['4'],
+                        $data['7'],
+                        $data['5'],
+                        $data['6']
+                    )) {
+                        $data['success'] = 'Sucesso ao inserir dados<br><a href="' . BASEURL . '/Menu" class="myLink">Voltar</a>';
+                        $this->loadTemplate('success', $data);
+                    } else {
+                        $data['error'] = "Erro ao inserir dados";
+                        $this->loadTemplate('error', $data);
+                    }
                 } else {
-                    $data['error'] = "Erro ao inserir dados";
-                    $this->loadTemplate('error', $data);
+                    if ($tablets->alter(
+                        $data['0'],
+                        $data['1'],
+                        $data['2'],
+                        $data['3'],
+                        $data['4'],
+                        $data['7'],
+                        $data['5'],
+                        $data['6'],
+                        $data['7']
+                    )) {
+                        $data['success'] = 'Sucesso ao inserir dados<br><a href="' . BASEURL . '/Menu" class="myLink">Voltar</a>';
+                        $this->loadTemplate('success', $data);
+                    } else {
+                        $data['error'] = "Erro ao inserir dados";
+                        $this->loadTemplate('error', $data);
+                    }
                 }
             } else {
-                if ($tablets->alter(
-                    $data['0'],
-                    $data['1'],
-                    $data['2'],
-                    $data['3'],
-                    $data['4'],
-                    $data['7'],
-                    $data['5'],
-                    $data['6'],
-                    $data['7']
-                )) {
-                    $data['success'] = 'Sucesso ao inserir dados<br><a href="' . BASEURL . '/Menu" class="myLink">Voltar</a>';
-                    $this->loadTemplate('success', $data);
-                } else {
-                    $data['error'] = "Erro ao inserir dados";
-                    $this->loadTemplate('error', $data);
-                }
+                $data['error'] = "Dados Inválidos, caso não exista um fornecedor cadastro por favor cadastre";
+                $this->loadTemplate('error', $data);
             }
         } else {
-            $data['error'] = "Dados Inválidos, caso não exista um fornecedor cadastro por favor cadastre";
-            $this->loadTemplate('error', $data);
+            $data['quit'] = true;
+            $this->loadTemplate('home', $data);
         }
     }
 
     public function alter($id = '')
     {
-        # Verifica se o id é númerico
-        if (!is_numeric($id)) {
-            $this->loadTemplate('home');
-        } else {
-            # Chama um model
-            $tablets = new Tablets();
-            # Faz uma consulta no banco
-            $data = $tablets->getTabletsById($id);
-            $url['baseurl'] = BASEURL . '/Tablets';
-            if (empty($data)) {
-                $this->loadTemplate('error', $data, $url);
+        if (isset($_SESSION['id_user'])) {
+            # Verifica se o id é númerico
+            if (!is_numeric($id)) {
+                $data['quit'] = true;
+                $this->loadTemplate('home', $data);
             } else {
-                # Chama a view
-                $this->loadTemplate('crud/alter', $data, $url);
+                # Chama um model
+                $tablets = new Tablets();
+                # Faz uma consulta no banco
+                $data = $tablets->getTabletsById($id);
+                $url['baseurl'] = BASEURL . '/Tablets';
+                if (empty($data)) {
+                    $this->loadTemplate('error', $data, $url);
+                } else {
+                    # Chama a view
+                    $this->loadTemplate('crud/alter', $data, $url);
+                }
             }
+        } else {
+            $data['quit'] = true;
+            $this->loadTemplate('home', $data);
         }
     }
 
     public function delete($id = '')
     {
-        if (!is_numeric($id)) {
-            $this->loadTemplate('home');
-        } else {
-            # Chama um model
-            $tablets = new Tablets();
-            $data = $tablets->delete($id);
-
-            if ($data) {
-                $confirm['success'] = "Registro $id excluido com sucesso";
-                $this->loadTemplate('success', $confirm);
+        if (isset($_SESSION['id_user'])) {
+            if (!is_numeric($id)) {
+                $data['quit'] = true;
+                $this->loadTemplate('home', $data);
             } else {
-                $confirm['error'] = "Erro ao excluir o registro $id";
-                $this->loadTemplate('error', $confirm);
+                # Chama um model
+                $tablets = new Tablets();
+                $data = $tablets->delete($id);
+
+                if ($data) {
+
+                    $confirm['success'] = "Registro $id excluido com sucesso";
+                    $this->loadTemplate('success', $confirm);
+                } else {
+                    $confirm['error'] = "Erro ao excluir o registro $id";
+                    $this->loadTemplate('error', $confirm);
+                }
+                # Chama a view
             }
-            # Chama a view
+        } else {
+            $data['quit'] = true;
+            $this->loadTemplate('home', $data);
         }
     }
 }

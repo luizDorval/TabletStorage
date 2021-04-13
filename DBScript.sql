@@ -22,4 +22,9 @@ CREATE TABLE Tablets (
 	register_on_system_date DATE,
 	CONSTRAINT pk_id_tablet PRIMARY KEY (id_tablet),
 	CONSTRAINT fk_id_provider FOREIGN KEY (id_provider) REFERENCES Providers(id_provider));
-	/* Os inserts abaixo s
+CREATE TABLE Users (
+	id_user INT UNSIGNED AUTO_INCREMENT,
+	email VARCHAR(200) NOT NULL,
+	password VARCHAR(50) NOT NULL,
+	CONSTRAINT pk_id_user PRIMARY KEY (id_user)
+);

@@ -7,6 +7,11 @@ class MenuController extends Controller
         # Chama um Model
         # ------
         # Chama a view
-        $this->loadTemplate('menu');
+        if (isset($_SESSION['id_user'])) {
+            $this->loadTemplate('menu');
+        } else {
+            $data['quit'] = true;
+            $this->loadTemplate('home', $data);
+        }
     }
 }

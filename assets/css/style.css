@@ -40,10 +40,11 @@ body {
 /*Header*/
 header {
     white-space: nowrap;
-    width: 8rem;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 header h1 {
@@ -53,6 +54,29 @@ header h1 {
 
 header h1 span {
     color: var(--primary);
+}
+
+header .quit {
+    position: absolute;
+    right: 1%;
+    width: 20%;
+}
+
+header .quit a {
+    width: 20%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary);
+    color: var(--textPrimary);
+    border: none;
+    border-radius: 0.2rem;
+    font-family: 'Poppins';
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0.2rem;
+    transition: 300ms;
 }
 
 /*Main*/
