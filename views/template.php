@@ -20,7 +20,7 @@
         <!-- CABEÇALHO -->
         <header>
             <h1>The <span><a class="myLink" href="<?php echo BASEURL . "/Menu"; ?>">Tablet</a></span> Storage</h1>
-            <div style="<?= ($this->data['quit']) ? 'display: none' : 'display: block' ?>;" class="quit"><a href="<?= BASEURL . '/Login/quit' ?>">Sair</a></div>
+            <div style="<?= ($this->data['quit']) ? 'display: none' : 'display: block' ?>;" class="quit"><a title="teste" href="<?= BASEURL . '/Login/quit' ?>">Sair</a></div>
         </header>
 
         <!-- -------------------------------------- -->
